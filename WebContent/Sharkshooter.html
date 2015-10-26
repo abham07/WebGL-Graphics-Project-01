@@ -1,0 +1,113 @@
+<!--
+*
+* GAME: SHARKSHOOTER 2D
+* CERATORS: ABAD HAMEED & SHAHOOD MIRZA
+* COMP4471: PROJECT 1 - PROF. BENSON
+* 29-10-2015
+*
+-->
+<!DOCTYPE html>
+<html>
+	<title>SHARKSHOOTER 2D</title>
+	
+	<script id="vertex-shader" type="x-shader/x-vertex">
+    attribute vec4 vPosition;
+	attribute vec4 vColor;
+	varying vec4 fColor;
+	uniform float theta;
+	
+	void main() {
+    	gl_Position = vPosition;
+    	fColor = vColor;
+    	float s = sin(theta);
+    	float c = cos(theta);
+    	gl_Position.x = -s * vPosition.x + c * vPosition.y;
+    	gl_Position.y = s * vPosition.y + c * vPosition.x;
+    	gl_Position.z = 0.0;
+    	gl_Position.w = 1.0;
+	}
+	</script>
+	
+	<script id="fragment-shader" type="x-shader/x-fragment">
+    precision mediump float;
+	varying vec4 fColor;
+	
+	void main() {
+    	gl_FragColor = fColor;
+	}
+	</script>
+	
+	<script type="text/javascript" src="webgl-utils.js"></script>
+	<script type="text/javascript" src="initShaders.js"></script>
+	<script type="text/javascript" src="MV.js"></script>
+	<script type="text/javascript" src="Sharkshooter.js"></script>
+	
+	<head>
+		<style>
+		table, td, th {
+		    border: 0px;
+		    vertical-align: middle;
+		    border-spacing: 7px;
+		}
+		h1{
+		    margin: 0;
+		    padding: 1;
+		}
+		h5{
+		    margin: 0;
+		    padding: 0;
+		}
+		</style>
+	</head>
+	
+	<body bgcolor="#00A2E8">
+		<center>
+	        <!--
+	<table style="width:50%">
+	<tr>
+	<td>Theta: </td>
+	<td><p id="theta"></p></td>
+	<td>A-Theta: </td>
+	<td><p id="atheta"></p></td>
+	</tr>
+	<tr>
+	<td>Shark At: </td>
+	<td><p id="sharkDir"></p></td>
+	<td>User Facing: </td>
+	<td><p id="usrDir"></p></td>
+	</tr>
+	<tr>
+	<td>Wall 1</td>
+	<td>Wall 2</td>
+	<td>Wall 3</td>
+	<td>Wall 4</td>
+	</tr>
+	<tr>
+	<td><p id="wall1"></td>
+	<td><p id="wall2"></p></td>
+	<td><p id="wall3"></td>
+	<td><p id="wall4"></p></td>
+	</tr>
+	</table>
+	-->
+	
+	        <h1><b>SHARKSHOOTER 2D</b></h1>
+	        <h5>Created By: Abad Hameed & Shahood Mirza</h5>
+	        
+	        <table>
+				<tr>
+					<td>Score: </td>
+					<td><p id="score"></p></td>
+					<td> | </td>
+					<td>Sharks Killed: </td>
+					<td><p id="sharksKilled"></p></td>
+				</tr>
+			</table>
+	
+	        <canvas id="gl-canvas" width="512" height="512">
+	            Oops ... your browser doesn't support the HTML5 canvas element
+	        </canvas>
+	    </center>
+	</body>
+
+</html>
